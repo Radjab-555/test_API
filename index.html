@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="styli.css">
+	<script src="script.js"></script>
+</head>
+<body>
+  <form id="clientForm">
+    <input type="text" name="account_number" placeholder="Номер счета">
+    <input type="text" name="last_name" placeholder="Фамилия">
+    <input type="text" name="first_name" placeholder="Имя">
+    <input type="text" name="middle_name" placeholder="Отчество">
+    <input type="date" name="date_of_birth" placeholder="Дата рождения">
+    <input type="text" name="inn" placeholder="ИНН">
+    <input type="text" name="responsible_person_full_name" placeholder="ФИО ответственного">
+    <button type="submit">Отправить</button>
+  </form>
+
+  <script>
+    document.getElementById('clientForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      
+      const formData = new FormData(this);
+      
+      const response = await fetch('http://localhost:3000/clients', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Object.fromEntries(formData))
+      });
+      
+      const result = await response.text();
+      console.log(result);
+    });
+  </script>
+</body>
+</html>
+
+</body>
+</html>
